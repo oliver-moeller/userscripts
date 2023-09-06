@@ -1,13 +1,13 @@
 // ==UserScript==
 // @name            MediaMarkt & Saturn Load More
 // @description     Adds a "Load x Times" button on the MediaMarkt and Saturn "Fundgrube" pages
-// @match           https://www.mediamarkt.de/*
-// @match           https://www.saturn.de/*
+// @match           https://www.mediamarkt.de/de/data/fundgrube
+// @match           https://www.saturn.de/de/data/fundgrube
 // @author          oliver-moeller
-// @version         1.0
+// @version         1.01
 // ==/UserScript==
 
-const xTimes = 20;
+const xTimes = 10;
 const originalButtonText = "Mehr Produkte laden"; //text on the original button, which will then be clicked x times
 const newButtonText = xTimes + "x laden"; //may not contain originalButtonText
 
@@ -52,7 +52,7 @@ button.style.right = "20px";
 button.style.bottom = "20px";
 
 button.style.cursor = "pointer";
-button.style.backgroundColor = "red";
+button.style.backgroundColor = /.*saturn.*/.test(window.location.hostname) ? "#ef7c00" : "#df0000";
 button.style.padding = "10px";
 button.style.borderRadius = "5px";
 button.style.borderStyle = "none";
