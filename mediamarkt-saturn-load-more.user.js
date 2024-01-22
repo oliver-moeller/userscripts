@@ -18,6 +18,7 @@ function querySelectorAllContainsText(selector, text) {
 }
 
 function loadXTimes() {
+  spinner.style.display = "inline-block";
   const scrollY = window.scrollY;
   let sucCount = 0;
   let errCount = 0;
@@ -35,29 +36,63 @@ function loadXTimes() {
     }
     if (sucCount >= xTimes || errCount >= 5) {
       clearInterval(interval);
-      console.log(window.scrollY);
       setTimeout(() => {
         window.scrollTo(0, scrollY);
+        spinner.style.display = "none";
       }, 500);
     }
   }, 250);
 }
 
+const color = /.*saturn.*/.test(window.location.hostname) ? "#ef7c00" : "#df0000";
 const button = document.createElement("button");
-button.textContent = newButtonText;
 button.onclick = loadXTimes;
+button.style.cssText = `
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
 
-button.style.position = "fixed";
-button.style.right = "20px";
-button.style.bottom = "20px";
+  cursor: pointer;
+  background-color: ${color};
+  padding: 10px;
+  border-radius: 5px;
+  border-style: none;
+  font-weight: bold;
+  font-size: 16px;
+  color: white;
 
-button.style.cursor = "pointer";
-button.style.backgroundColor = /.*saturn.*/.test(window.location.hostname) ? "#ef7c00" : "#df0000";
-button.style.padding = "10px";
-button.style.borderRadius = "5px";
-button.style.borderStyle = "none";
-button.style.fontWeight = "bold";
-button.style.fontSize = "16px";
-button.style.color = "white";
-
+  align-items: center;
+  display: flex;
+`;
 document.body.appendChild(button);
+
+const spinner = document.createElement("span");
+spinner.style.cssText = `
+  width: 16px;
+  height: 16px;
+  margin-right: 8px;
+  border: 2px solid white;
+  border-right-color: transparent;
+  border-radius: 50%;
+  box-sizing: border-box;
+  display: none;
+`;
+spinner.animate(
+  [
+    {
+      transform: "rotate(0deg)",
+    },
+    {
+      transform: "rotate(360deg)",
+    },
+  ],
+  {
+    duration: 1000,
+    iterations: Infinity,
+  }
+);
+button.appendChild(spinner);
+
+const label = document.createElement("span");
+label.textContent = newButtonText;
+button.appendChild(label);
