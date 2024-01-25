@@ -7,13 +7,18 @@
 
 // since YT Music is a single-page application the script won't load when just matching "https://music.youtube.com/watch?v=*"
 
-const intervalSeconds = 60;
+const intervalSeconds = 10;
 
+let previousTitle = "";
 function main() {
   if (window.location.pathname === "/watch") {
     let activeQueueItem = document.querySelector('.modular > * ytmusic-player-queue-item[play-button-state="playing"]');
     if (activeQueueItem) {
-      activeQueueItem.scrollIntoView();
+      let title = activeQueueItem.querySelector(".song-title").innerText;
+      if (title !== previousTitle) {
+        activeQueueItem.scrollIntoView();
+        previousTitle = title;
+      }
     }
   }
 }

@@ -48,34 +48,32 @@ const color = /.*saturn.*/.test(window.location.hostname) ? "#ef7c00" : "#df0000
 const button = document.createElement("button");
 button.onclick = loadXTimes;
 button.style.cssText = `
+  display: flex;
   position: fixed;
   right: 20px;
   bottom: 20px;
-
+  align-items: center;
   cursor: pointer;
+  border-style: none;
+  border-radius: 5px;
   background-color: ${color};
   padding: 10px;
-  border-radius: 5px;
-  border-style: none;
+  color: white;
   font-weight: bold;
   font-size: 16px;
-  color: white;
-
-  align-items: center;
-  display: flex;
 `;
 document.body.appendChild(button);
 
 const spinner = document.createElement("span");
 spinner.style.cssText = `
-  width: 16px;
-  height: 16px;
+  display: none;
+  box-sizing: border-box;
   margin-right: 8px;
   border: 2px solid white;
   border-right-color: transparent;
   border-radius: 50%;
-  box-sizing: border-box;
-  display: none;
+  width: 16px;
+  height: 16px;
 `;
 spinner.animate(
   [
