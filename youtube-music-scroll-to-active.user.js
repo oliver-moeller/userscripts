@@ -12,7 +12,9 @@ const intervalSeconds = 10;
 let previousTitle = "";
 function main() {
   if (window.location.pathname === "/watch") {
-    let activeQueueItem = document.querySelector('.modular > * ytmusic-player-queue-item[play-button-state="playing"]');
+    let activeQueueItem = document.querySelector(
+      'ytmusic-player-page > * ytmusic-player-queue-item[play-button-state="playing"]'
+    );
     if (activeQueueItem) {
       let title = activeQueueItem.querySelector(".song-title").innerText;
       if (title !== previousTitle) {
