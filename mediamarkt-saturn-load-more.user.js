@@ -1,10 +1,10 @@
 // ==UserScript==
 // @name            MediaMarkt & Saturn Load More
+// @version         2024-02-12
 // @description     Adds a "Load x Times" button on the MediaMarkt and Saturn "Fundgrube" pages
+// @author          oliver-moeller
 // @match           https://www.mediamarkt.de/de/data/fundgrube
 // @match           https://www.saturn.de/de/data/fundgrube
-// @author          oliver-moeller
-// @version         1.01
 // ==/UserScript==
 
 const xTimes = 10;

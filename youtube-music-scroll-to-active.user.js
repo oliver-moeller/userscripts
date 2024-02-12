@@ -1,8 +1,9 @@
 // ==UserScript==
-// @name             YouTube Music scroll to active periodically
-// @match            https://music.youtube.com/*
-// @version          1.0
-// @description      scrolls the active/playing item in the playlist into view
+// @name            YouTube Music scroll to active periodically
+// @version         2024-02-12
+// @description     scrolls the active/playing item in the playlist into view
+// @author          oliver-moeller
+// @match           https://music.youtube.com/*
 // ==/UserScript==
 
 // since YT Music is a single-page application the script won't load when just matching "https://music.youtube.com/watch?v=*"
