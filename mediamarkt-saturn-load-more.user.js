@@ -7,7 +7,7 @@
 // @match           https://www.saturn.de/de/data/fundgrube
 // ==/UserScript==
 
-const xTimes = 10;
+const xTimes = 5;
 const originalButtonText = "Mehr Produkte laden"; //text on the original button, which will then be clicked x times
 const newButtonText = xTimes + "x laden"; //may not contain originalButtonText
 
@@ -19,7 +19,8 @@ function querySelectorAllContainsText(selector, text) {
 
 function loadXTimes() {
   spinner.style.display = "inline-block";
-  const scrollY = window.scrollY;
+  //const scrollY = window.scrollY;
+  const scrollTop = document.body.scrollTop;
   let sucCount = 0;
   let errCount = 0;
   let buttons;
@@ -37,7 +38,8 @@ function loadXTimes() {
     if (sucCount >= xTimes || errCount >= 5) {
       clearInterval(interval);
       setTimeout(() => {
-        window.scrollTo(0, scrollY);
+        //window.scrollTo(0, scrollY);
+        document.body.scrollTop = scrollTop;
         spinner.style.display = "none";
       }, 500);
     }
