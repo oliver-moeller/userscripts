@@ -1,10 +1,10 @@
 // ==UserScript==
 // @name            MediaMarkt & Saturn Load More
-// @version         2024-02-12
+// @version         2024-02-13
 // @description     Adds a "Load x Times" button on the MediaMarkt and Saturn "Fundgrube" pages
 // @author          oliver-moeller
-// @match           https://www.mediamarkt.de/de/data/fundgrube
-// @match           https://www.saturn.de/de/data/fundgrube
+// @match           https://www.mediamarkt.de/de/data/fundgrube*
+// @match           https://www.saturn.de/de/data/fundgrube*
 // ==/UserScript==
 
 const xTimes = 5;
@@ -19,12 +19,11 @@ function querySelectorAllContainsText(selector, text) {
 
 function loadXTimes() {
   spinner.style.display = "inline-block";
-  //const scrollY = window.scrollY;
-  const scrollTop = document.body.scrollTop;
+  const scrollTop = document.body.scrollTop; //const scrollY = window.scrollY;
   let sucCount = 0;
   let errCount = 0;
   let buttons;
-  const interval = setInterval(() => {
+  const loadInterval = setInterval(() => {
     buttons = querySelectorAllContainsText("button", originalButtonText); //the button is always regenerated, requery every time
     if (!buttons.length) {
       errCount++;
@@ -36,12 +35,17 @@ function loadXTimes() {
       });
     }
     if (sucCount >= xTimes || errCount >= 5) {
-      clearInterval(interval);
-      setTimeout(() => {
-        //window.scrollTo(0, scrollY);
-        document.body.scrollTop = scrollTop;
-        spinner.style.display = "none";
-      }, 500);
+      clearInterval(loadInterval);
+      errCount = 0;
+      const scrollInterval = setInterval(() => {
+        document.body.scrollTop = scrollTop; //window.scrollTo(0, scrollY);
+        if (document.body.scrollTop !== scrollTop && errCount < 5) {
+          errCount++;
+        } else {
+          clearInterval(scrollInterval);
+          spinner.style.display = "none";
+        }
+      }, 250);
     }
   }, 250);
 }
