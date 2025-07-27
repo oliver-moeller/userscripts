@@ -1,0 +1,16 @@
+/*
+==UserCSS==
+@name             Netflix & Amazon subtitle style
+@match            https://www.netflix.com/*
+@match            https://www.amazon.de/gp/video/*
+@version          1.0
+==/UserCSS==
+*/
+
+.player-timedtext>.player-timedtext-text-container>span>span, span.atvwebplayersdk-captions-text {
+  --outline-color: #111111;
+  -webkit-text-stroke: var(--outline-color) 11px;
+  paint-order: stroke fill;
+  filter: drop-shadow(2px 3px 0px var(--outline-color));
+  font-family: 'Trebuchet MS' !important;
+}
