@@ -3,14 +3,29 @@
 @name             Netflix & Amazon subtitle style
 @match            https://www.netflix.com/*
 @match            https://www.amazon.de/gp/video/*
+@match            https://www.amazon.de/Amazon-Video/*
 @version          1.0
 ==/UserCSS==
 */
 
-.player-timedtext>.player-timedtext-text-container>span>span, span.atvwebplayersdk-captions-text {
+:root {
+  --size-factor: .9;
   --outline-color: #111111;
-  -webkit-text-stroke: var(--outline-color) 11px;
+}
+
+/* Netflix, Amazon */
+.player-timedtext > .player-timedtext-text-container > span > span,
+span.atvwebplayersdk-captions-text {
+  -webkit-text-stroke: var(--outline-color) calc(0.75vh * var(--size-factor));
   paint-order: stroke fill;
-  filter: drop-shadow(2px 3px 0px var(--outline-color));
+  filter: drop-shadow(calc(0.1vh * var(--size-factor)) calc(0.25vh * var(--size-factor)) 0 var(--outline-color));
   font-family: 'Trebuchet MS' !important;
+  font-size: calc(5vh * var(--size-factor)) !important;
+  font-weight: bold !important;
+  text-shadow: none !important;
+}
+
+/* Amazon Prime Video: reduce opacity of shadow at top and bottom of page on hover */
+div.f8hspre.f1makowq {
+  opacity: 80% !important
 }
